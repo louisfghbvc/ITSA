@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1555674272 source:c:\users\asus\desktop\itsa 69 p5\main.cpp
+	<iostream>
+	<set>
+	<cstring>
+	<bitset>
+

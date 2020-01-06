@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1555087751 source:c:\users\asus\desktop\itsa70p2\main.cpp
+	<iostream>
+	<cmath>
+	<iomanip>
+
