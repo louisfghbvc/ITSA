@@ -1,0 +1,26 @@
+#include <iostream>  
+#include <algorithm>  
+#define N 50005  
+using namespace std;  
+typedef long long LL;  
+LL f[N],g[N];  
+int main()  
+{  
+    int t,n;  
+    cin>>t;  
+    while(t--){  
+        cin>>n;  
+        for(int i=0; i<n; ++i)  
+            cin>>f[i];  
+        for(int i=0; i<n; ++i)  
+            cin>>g[i];  
+        sort(f,f+n);  
+        LL sum=0;  
+        for(int i=0; i<n; ++i){  
+            int j=upper_bound(f, f+n, g[i])-f;  
+            sum+=n-j;  
+        }  
+        cout<<sum<<endl;  
+    }  
+    return 0;  
+} 

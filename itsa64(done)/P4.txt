@@ -1,0 +1,63 @@
+#include <iostream>  
+#include <sstream>  
+#include <cstring>  
+#include <queue>  
+#define N 10000  
+using namespace std;  
+struct node{  
+    bool l,r;  
+    int val;  
+}tre[4*N];  
+void print(int id){  
+    if(id==1)  
+        cout<<tre[id].val;  
+    else  
+        cout<<" "<<tre[id].val;  
+    if(tre[id].l)  
+        print(id*2);  
+    if(tre[id].r)  
+        print(id*2+1);  
+}  
+int main()  
+{  
+    string s;  
+    while(getline(cin, s)){  
+        memset(tre, 0, sizeof(tre));  
+        stringstream ss(s);  
+        int v,l,r,id=1;  
+        ss>>v>>l>>r;  
+        tre[id].val=v;  
+        tre[id].l=l;  
+        tre[id].r=r;  
+        queue <pair<int, int> > q;  
+        if(l)  
+            q.push(make_pair(1, id));  
+        if(r)  
+            q.push(make_pair(2, id));  
+        while(!q.empty()){  
+            int j=q.front().first, p=q.front().second; q.pop();  
+            ss>>v>>l>>r;  
+            if(j==1){  
+                tre[p*2].val=v;  
+                tre[p*2].l=l;  
+                tre[p*2].r=r;  
+                if(l)  
+                    q.push(make_pair(1, p*2));  
+                if(r)  
+                    q.push(make_pair(2, p*2));  
+            }  
+            else{  
+                tre[p*2+1].val=v;  
+                tre[p*2+1].l=l;  
+                tre[p*2+1].r=r;  
+                if(l)  
+                    q.push(make_pair(1, p*2+1));  
+                if(r)  
+                    q.push(make_pair(2, p*2+1));  
+            }  
+        }  
+        print(1);  
+        cout<<endl;  
+    }  
+    return 0;  
+}  
