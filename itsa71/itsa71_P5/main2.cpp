@@ -2,7 +2,7 @@
 #define N 90005
 using namespace std;
 vector<int> adj[N];
-int dfn[N][2], mx, id;
+int dfn[N], mx, id;
 bool vis[N];
 void dfs(int u){
     for(int i = 0; i < adj[u].size(); ++i){
@@ -10,23 +10,9 @@ void dfs(int u){
         if(vis[v])
             continue;
         vis[v] = true;
-        dfn[v][0] = dfn[u][0] + 1;
-        if(mx < dfn[v][0]){
-            mx = dfn[v][0];
-            id = v;
-        }
-        dfs(v);
-    }
-}
-void dfsback(int u){
-    for(int i = 0; i < adj[u].size(); ++i){
-        int v = adj[u][i];
-        if(vis[v])
-            continue;
-        vis[v] = true;
-        dfn[v][1] = dfn[u][1] + 1;
-        if(mx < dfn[v][1]){
-            mx = dfn[v][1];
+        dfn[v] = dfn[u] + 1;
+        if(mx < dfn[v]){
+            mx = dfn[v];
             id = v;
         }
         dfs(v);
@@ -49,21 +35,19 @@ int main()
             adj[b].push_back(a);
         }
         mx = 0;
-        dfn[0][0] = 0;
+        dfn[0] = 0;
         dfs(0);
 
         memset(vis, 0, sizeof vis);
         mx = 0;
-        dfn[id][1] = 0;
-        dfsback(id);
-
-        memset(vis, 0, sizeof vis);
-        mx = 0;
-        dfn[id][0] = 0;
+        dfn[id] = 0;
         dfs(id);
-        int mid = mx / 2;
+
+        int mid = mx / 2, mid1 = -1;
+        if(mx & 1)
+            mid1 = mx / 2 + 1;
         for(int i = 0; i < n; ++i){
-            if(dfn[i][0] == mid || dfn[i][1] == mid){
+            if(dfn[i] == mid || dfn[i] == mid1){
                 cout << i << endl;
                 break;
             }
