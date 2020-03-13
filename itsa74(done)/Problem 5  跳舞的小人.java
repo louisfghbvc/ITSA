@@ -16,17 +16,16 @@ public class Main {
                     num = Integer.parseInt(s[i]);  
                 else{  
                     char t = (char)(c + num);
-                    if(t > 'Z')
-                          t = (char)(t % 'Z' + 'A' - 1);
-                    str.append(t);  
+                    str.append((char)((t-'A') % 26 + 'A'));  
                 }  
             }  
             System.out.println(str.reverse());  
         }  
     }  
     /*...Java才給過G8 */  
-}
+} 
 /*
 1
 A B C 13 D E 2 X Y Z 20
 */
+
