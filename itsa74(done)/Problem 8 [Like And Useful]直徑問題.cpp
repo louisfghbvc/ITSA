@@ -48,7 +48,7 @@ int main()
                 cin >> x;    
                 if(x == '0') continue;    
                 p[id++] = {j, i};    
-                if(mn.y > p[id - 1].y || (mn.y == p[id - 1].y && mn.x == p[id - 1].x)){    
+                if(mn.y > p[id - 1].y || (mn.y == p[id - 1].y && mn.x > p[id - 1].x)){    
                     mn = p[id - 1];    
                     md = id - 1;    
                 }    
