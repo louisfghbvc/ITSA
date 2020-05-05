@@ -46,7 +46,7 @@ int dfs(int k, int x, int pre){
     }
     if(dp[k][x][pre] != -1) return dp[k][x][pre];
     int res = 0;
-    for(int j = min(pre, 6); j >= 1; --j){
+    for(int j = pre; j >= 1; --j){
         res += dfs(k-1, x-j, j);
     }
     return dp[k][x][pre] = res;
@@ -55,9 +55,9 @@ int dfs(int k, int x, int pre){
 int main()
 {
     int k, n;
+    memset(dp, -1, sizeof dp);
     while(cin >> k >> n){
-        memset(dp, -1, sizeof dp);
-        cout << dfs(k, n, n) << endl;
+        cout << dfs(k, n, min(n, 6)) << endl;
     }
     return 0;
 }
