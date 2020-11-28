@@ -1,4 +1,5 @@
-// 1WA 4AC ???.
+// AC but confused. de morgan not work.
+// key point is inside method.
 
 #include <bits/stdc++.h>
 
@@ -11,45 +12,41 @@ template<typename T> ostream& operator<<(ostream &os, const vector<T> &v) { os <
 void dbg_out() { cerr << " end.\n"; }
 template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) { cerr << ' ' << H; dbg_out(T...); }
 
-int p[505];
+int p[205];
 int find(int x){
     return p[x] < 0 ? x: p[x] = find(p[x]);
 }
 
 bool inside(array<int, 4> a, array<int, 4> b){
     if(a[0] >= b[0] && a[0] <= b[2] && a[1] >= b[1] && a[1] <= b[3]) return true;
+    if(a[2] >= b[0] && a[2] <= b[2] && a[1] >= b[1] && a[1] <= b[3]) return true;
+    if(a[0] >= b[0] && a[0] <= b[2] && a[3] >= b[1] && a[3] <= b[3]) return true;
     if(a[2] >= b[0] && a[2] <= b[2] && a[3] >= b[1] && a[3] <= b[3]) return true;
     return false;
 }
 
 void solve(){
     int n;
-    while(cin >> n){
-        memset(p, -1, sizeof p);
-        map<array<int, 4>, int> mp;
-        vector<array<int, 4>> arr;
-        for(int i = 0; i < n; ++i){
-            array<int, 4> tmp;
-            for(int k = 0; k < 4; ++k) cin >> tmp[k];
-            mp[tmp] = mp.size()+1;
-            arr.push_back(tmp);
-        }
-        for(int i = 0; i < n; ++i){
-            for(int j = i+1; j < n; ++j){
-                int a = mp[arr[i]], b = mp[arr[j]];
-                if(inside(arr[i], arr[j]) || inside(arr[j], arr[i])){
-                    a = find(a), b = find(b);
-                    if(a == b) continue;
-                    p[b] = a;
-                }
+    cin >> n;
+    memset(p, -1, sizeof p);
+    vector<array<int, 4>> arr;
+    for(int i = 0; i < n; ++i){
+        array<int, 4> tmp;
+        for(int k = 0; k < 4; ++k) cin >> tmp[k];
+        arr.push_back(tmp);
+    }
+    int cnt = n;
+    for(int i = 0; i < n; ++i){
+        for(int j = i+1; j < n; ++j){
+            if(inside(arr[i], arr[j]) || inside(arr[j], arr[i])){
+                int a = find(i), b = find(j);
+                if(a == b) continue;
+                p[b] = a;
+                cnt--;
             }
         }
-        unordered_set<int> ans;
-        for(int i = 0; i < n; ++i){
-            ans.insert(find(mp[arr[i]]));
-        }
-        cout << ans.size() << "\n";
     }
+    cout << cnt << "\n";
 }
 
 int main()
