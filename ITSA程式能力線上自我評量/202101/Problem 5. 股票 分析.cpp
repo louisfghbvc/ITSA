@@ -16,7 +16,7 @@ void solve(int n){
     vector<double> arr(7);
     for(auto &it: arr) cin >> it;
 
-    double mn = 200;
+    double mn = 1e9;
     int mni = 0;
     double profit = 0.0; 
     int ansl = 0, ansr = 0;
@@ -41,7 +41,7 @@ void solve(int n){
         int tmp = profit * 100;
         printf("Best buy date:%d\n", ansl);
         printf("Best sell date:%d\n", ansr);
-        printf("profit:%.2f\n", 1.0*tmp/100);
+        printf("Profit:%.2f\n", 1.0*tmp/100);
     }
 }
 
