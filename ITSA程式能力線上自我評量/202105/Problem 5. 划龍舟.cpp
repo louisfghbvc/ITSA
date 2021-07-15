@@ -37,9 +37,11 @@ void solve(int n){
             diff = abs(first - second);
             mn = min(c, n-c);
         }
+        /** don't put this in judge. but this is correct. 
         else if(abs(first - second) == diff){
             mn = min({mn, c, n-c}); 
         }
+        **/
     }
 
     cout << diff << "\n" << mn << "\n";
